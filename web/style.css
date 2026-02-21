@@ -28,7 +28,12 @@ header {
   align-items: center;
   justify-content: flex-start;
   padding: 16px 24px;
-  background: linear-gradient(90deg, #101b2f 0%, #162544 100%);
+  background:
+    radial-gradient(circle at 20% 40%, rgba(59, 75, 55, 0.6) 0 18%, transparent 19%),
+    radial-gradient(circle at 60% 30%, rgba(34, 49, 36, 0.7) 0 22%, transparent 23%),
+    radial-gradient(circle at 85% 70%, rgba(88, 97, 67, 0.5) 0 20%, transparent 21%),
+    radial-gradient(circle at 35% 80%, rgba(26, 34, 24, 0.7) 0 16%, transparent 17%),
+    linear-gradient(90deg, #1a2a1b 0%, #283a2a 100%);
   border-bottom: 1px solid #263450;
   gap: 18px;
 }

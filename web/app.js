@@ -45,14 +45,14 @@ const DEVICE_PROFILES = [
   },
   {
     id: "hunting_68",
-    name: "Hunting Radio 68–72 MHz",
+    name: "Metsästysradio 68–72 MHz",
     freqGHz: 0.070,
     txPowerDbm: 37,
     rxSensDbm: -119,
   },
   {
     id: "lv217",
-    name: "LV217 / PRC-77 Type",
+    name: "LV217 / PRC‑77‑tyyppi",
     freqGHz: 0.052,
     txPowerDbm: 33,
     rxSensDbm: -118,
@@ -108,14 +108,14 @@ const DEVICE_PROFILES = [
   },
   {
     id: "wifi24",
-    name: "Wi-Fi 2.4 (low-rate)",
+    name: "Wi‑Fi 2.4 (alhaiset nopeudet)",
     freqGHz: 2.437,
     txPowerDbm: 20,
     rxSensDbm: -90,
   },
   {
     id: "wifi5",
-    name: "Wi-Fi 5 GHz (low-rate)",
+    name: "Wi‑Fi 5 GHz (alhaiset nopeudet)",
     freqGHz: 5.5,
     txPowerDbm: 30,
     rxSensDbm: -92,
@@ -184,7 +184,7 @@ function setDevice(profile) {
 function computeCoverage(latlng) {
   if (!meta || !chmData || !dtmData) return;
 
-  statusEl.textContent = "Computing...";
+  statusEl.textContent = "Lasketaan...";
   progressBar.style.width = "0%";
   progressText.textContent = "0%";
 
@@ -225,7 +225,7 @@ function computeCoverage(latlng) {
         legendMaxEl.textContent = maxA.toFixed(2);
         legendMinEl.textContent = "0";
         updateLegendTicks(maxA);
-        statusEl.textContent = `Done (${f.toFixed(3)} GHz)`;
+        statusEl.textContent = `Valmis (${f.toFixed(3)} GHz)`;
         progressBar.style.width = "100%";
         progressText.textContent = "100%";
       }

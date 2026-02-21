@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>RF Attenuation Map</title>
+  <title>RF‑peittokartta</title>
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -15,48 +15,48 @@
 <body>
   <div id="app">
     <header>
-      <h1>RF Coverage Map</h1>
-      <a class="doc-link" href="docs.html" target="_blank" rel="noreferrer">Docs</a>
+      <h1>RF‑peittokartta</h1>
+      <a class="doc-link" href="docs.html" target="_blank" rel="noreferrer">Dokumentaatio</a>
       <div class="controls">
         <label>
-          Device
+          Laite
           <select id="deviceSelect"></select>
         </label>
         <label>
-          TX Height (m)
+          TX‑korkeus (m)
           <input id="txHeight" type="number" step="0.5" value="1.5" />
         </label>
         <label>
-          RX Height (m)
+          RX‑korkeus (m)
           <input id="rxHeight" type="number" step="0.5" value="1.5" />
         </label>
         <details id="advanced">
-          <summary>Advanced</summary>
+          <summary>Lisäasetukset</summary>
           <div class="advanced-grid">
             <label>
-              Frequency (GHz)
+              Taajuus (GHz)
               <input id="freq" type="range" min="0.003" max="6.0" step="0.001" value="0.3" />
             </label>
             <div id="freqValue">0.300 GHz</div>
             <label>
-              Tx Power (dBm)
+              Lähetysteho (dBm)
               <input id="txPower" type="number" step="0.1" />
             </label>
             <label>
-              Rx Sensitivity (dBm)
+              Vastaanottimen herkkyys (dBm)
               <input id="rxSens" type="number" step="0.1" />
             </label>
             <label>
-              ELINT Sensitivity (dBm)
+              ELINT‑herkkyys (dBm)
               <input id="elintSens" type="number" step="0.1" />
             </label>
             <label>
-              Reliability (%)
+              Luotettavuus (%)
               <input id="reliability" type="range" min="50" max="99" step="1" value="90" />
             </label>
             <div id="reliabilityValue">90%</div>
             <label>
-              Analysis Grid
+              Laskentaruudukko
               <select id="gridSize">
                 <option value="128">128</option>
                 <option value="256" selected>256</option>
@@ -65,22 +65,22 @@
             </label>
             <label class="checkbox">
               <input id="useElint" type="checkbox" />
-              Detectability (ELINT)
+              Havaittavuus (ELINT)
             </label>
           </div>
         </details>
-        <div id="status">Click map to compute.</div>
+        <div id="status">Klikkaa karttaa laskentaa varten.</div>
         <div id="progressWrap">
           <div id="progressBar"></div>
         </div>
         <div id="progressText">0%</div>
-        <div class="hint">Click the map to compute area attenuation.</div>
+        <div class="hint">Klikkaa karttaa ja laske peitto.</div>
       </div>
     </header>
     <main>
       <div id="map"></div>
       <div id="legend">
-        <div class="legend-title">Margin (dB)</div>
+        <div class="legend-title">Marginaali (dB)</div>
         <div id="legendMax">max</div>
         <div id="legendBody">
           <canvas id="legendCanvas" width="28" height="180"></canvas>
