@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RF Attenuation Map</title>
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>RF Coverage Map</h1>
+      <a class="doc-link" href="docs.html" target="_blank" rel="noreferrer">Docs</a>
+      <div class="controls">
+        <label>
+          Device
+          <select id="deviceSelect"></select>
+        </label>
+        <label>
+          TX Height (m)
+          <input id="txHeight" type="number" step="0.5" value="1.5" />
+        </label>
+        <label>
+          RX Height (m)
+          <input id="rxHeight" type="number" step="0.5" value="1.5" />
+        </label>
+        <details id="advanced">
+          <summary>Advanced</summary>
+          <div class="advanced-grid">
+            <label>
+              Frequency (GHz)
+              <input id="freq" type="range" min="0.003" max="6.0" step="0.001" value="0.3" />
+            </label>
+            <div id="freqValue">0.300 GHz</div>
+            <label>
+              Tx Power (dBm)
+              <input id="txPower" type="number" step="0.1" />
+            </label>
+            <label>
+              Rx Sensitivity (dBm)
+              <input id="rxSens" type="number" step="0.1" />
+            </label>
+            <label>
+              ELINT Sensitivity (dBm)
+              <input id="elintSens" type="number" step="0.1" />
+            </label>
+            <label>
+              Reliability (%)
+              <input id="reliability" type="range" min="50" max="99" step="1" value="90" />
+            </label>
+            <div id="reliabilityValue">90%</div>
+            <label>
+              Analysis Grid
+              <select id="gridSize">
+                <option value="128">128</option>
+                <option value="256" selected>256</option>
+                <option value="512">512</option>
+              </select>
+            </label>
+            <label class="checkbox">
+              <input id="useElint" type="checkbox" />
+              Detectability (ELINT)
+            </label>
+          </div>
+        </details>
+        <div id="status">Click map to compute.</div>
+        <div id="progressWrap">
+          <div id="progressBar"></div>
+        </div>
+        <div id="progressText">0%</div>
+        <div class="hint">Click the map to compute area attenuation.</div>
+      </div>
+    </header>
+    <main>
+      <div id="map"></div>
+      <div id="legend">
+        <div class="legend-title">Margin (dB)</div>
+        <div id="legendMax">max</div>
+        <div id="legendBody">
+          <canvas id="legendCanvas" width="28" height="180"></canvas>
+          <div id="legendTicks">
+            <div data-tick="1"></div>
+            <div data-tick="0.75"></div>
+            <div data-tick="0.5"></div>
+            <div data-tick="0.25"></div>
+            <div data-tick="0"></div>
+          </div>
+        </div>
+        <div id="legendMin">0</div>
+      </div>
+    </main>
+  </div>
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <script src="app.js"></script>
+</body>
+</html>

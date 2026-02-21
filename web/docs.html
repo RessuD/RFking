@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RF Coverage Docs</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { background: #0f1a2b; }
+    .doc {
+      max-width: 900px;
+      margin: 32px auto;
+      padding: 0 20px 40px;
+      line-height: 1.5;
+      color: #e8edf5;
+    }
+    h2 { margin-top: 24px; }
+    code { background: #13213a; padding: 2px 4px; border-radius: 4px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 20px;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid #2b3d5f;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background: #162544;
+    }
+  </style>
+</head>
+<body>
+  <div class="doc">
+    <h1>Coverage / Detectability Model</h1>
+
+    <h2>Overview</h2>
+    <p>
+      Coverage is computed as received power margin over a threshold:
+      <code>Rx(dBm) = EIRP - L_total</code>, then
+      <code>Margin = Rx - Sensitivity</code>. Cells with positive margin are detectable.
+    </p>
+
+    <h2>Path Loss Components</h2>
+    <ul>
+      <li>Free-space path loss (FSPL) using distance and frequency.</li>
+      <li>Terrain diffraction using Deygout multi-knife-edge over the DTM profile.</li>
+      <li>Foliage attenuation integrated along the path using canopy height (CHM).</li>
+      <li>Reliability margin: a simple fade margin added to total loss.</li>
+    </ul>
+
+    <h2>Reliability Slider</h2>
+    <p>
+      The UI reliability slider applies a fade margin from 0 dB at 50% to 20 dB at 99%.
+      This is a pragmatic approximation, not a full ITU-R time/location availability model.
+    </p>
+
+    <h2>Detectability</h2>
+    <p>
+      The ELINT mode uses its own sensitivity threshold. By default it matches the device
+      receiver sensitivity, but you can set it independently.
+    </p>
+
+    <h2>Device Defaults</h2>
+    <p>Defaults are typical values and can be edited in the UI.</p>
+    <p>
+      Note: Hunting 68–72 MHz and LV217 sensitivities use a typical narrowband FM receiver
+      sensitivity (about 0.25 μV ≈ -119 dBm) as a proxy when device-specific specs are not available.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Device</th>
+          <th>Freq (GHz)</th>
+          <th>Tx Power (dBm)</th>
+          <th>Rx Sens (dBm)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>LoRa (EU868)</td><td>0.868</td><td>14</td><td>-137</td></tr>
+        <tr><td>PMR446</td><td>0.446</td><td>27</td><td>-119</td></tr>
+        <tr><td>Hunting 68–72 MHz</td><td>0.070</td><td>37</td><td>-119</td></tr>
+        <tr><td>LV217 / PRC-77 type</td><td>0.052</td><td>33</td><td>-118</td></tr>
+        <tr><td>GSM900 (UE)</td><td>0.9</td><td>33</td><td>-102</td></tr>
+        <tr><td>DCS1800 (UE)</td><td>1.8</td><td>30</td><td>-102</td></tr>
+        <tr><td>UMTS2100 (UE)</td><td>2.1</td><td>24</td><td>-106.7</td></tr>
+        <tr><td>LTE 800 (UE, 10 MHz)</td><td>0.8</td><td>23</td><td>-97</td></tr>
+        <tr><td>LTE 2600 (UE, 10 MHz)</td><td>2.6</td><td>23</td><td>-97</td></tr>
+        <tr><td>5G NR 700 (UE, 20 MHz)</td><td>0.7</td><td>23</td><td>-93.8</td></tr>
+        <tr><td>5G NR 3.5 (UE, 20 MHz)</td><td>3.5</td><td>23</td><td>-93.8</td></tr>
+        <tr><td>Wi-Fi 2.4 (low-rate)</td><td>2.437</td><td>20</td><td>-90</td></tr>
+        <tr><td>Wi-Fi 5 GHz (low-rate)</td><td>5.5</td><td>30</td><td>-92</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Performance Notes</h2>
+    <p>
+      The analysis grid controls compute cost. 256x256 is a good balance for browser-based
+      diffraction + foliage integration. Larger grids increase compute time significantly.
+    </p>
+
+    <h2>Sources</h2>
+    <ul>
+      <li>LoRa sensitivity (SX126x/SX127x @ SF12/125 kHz): https://www.semtech.com/products/wireless-rf/lora-connect/sx1261</li>
+      <li>PMR446 sensitivity example (0.25 μV @ 12 dB SINAD): https://www.belfone.com/products_detail/44.html</li>
+      <li>0.25 μV to dBm equivalence: https://www.pmrschool.com/pmrtechn.htm</li>
+      <li>VHF handheld sensitivity example (0.25 μV @ 12 dB SINAD): https://www.standardhorizon.com/na/product-landing-page/hx280e.html</li>
+      <li>PRC-117 family sensitivity example (-118 dBm, 10 dB SINAD) used as proxy for LV217: https://reference.org/facts/anprc-117/t6zG5quG</li>
+      <li>GSM reference sensitivity: https://www.techspecs.info/3gpp/45.005/</li>
+      <li>UMTS reference sensitivity: https://www.techspecs.info/3gpp/25.101/</li>
+      <li>LTE reference sensitivity (10 MHz): https://www.techspecs.info/3gpp/36.521-1/</li>
+      <li>5G NR reference sensitivity (20 MHz): https://www.techspecs.info/3gpp/38.101-1/</li>
+      <li>Wi‑Fi sensitivity examples: https://pubs.vocera.com/solution/vig/production/help/vig_vig_help/solution/vig/production/topics/vig_receiversensitivity.html</li>
+    </ul>
+  </div>
+</body>
+</html>

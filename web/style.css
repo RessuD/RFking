@@ -1,0 +1,230 @@
+:root {
+  --bg: #0f1a2b;
+  --panel: #141f33;
+  --accent: #f9b233;
+  --text: #e8edf5;
+  --muted: #9fb0c8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Space Grotesk", "Work Sans", "Segoe UI", sans-serif;
+  background: radial-gradient(circle at 20% 20%, #1c2b4b 0%, #0f1a2b 45%, #0a1324 100%);
+  color: var(--text);
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 16px 24px;
+  background: linear-gradient(90deg, #101b2f 0%, #162544 100%);
+  border-bottom: 1px solid #263450;
+  gap: 18px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: 0.4px;
+}
+
+.doc-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.doc-link:hover {
+  text-decoration: underline;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 14px;
+  flex-wrap: wrap;
+}
+
+.controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--text);
+}
+
+.controls input[type="range"] {
+  width: 220px;
+}
+
+.controls input[type="number"],
+.controls select {
+  width: 140px;
+  background: #0e182b;
+  color: var(--text);
+  border: 1px solid #2c3c5a;
+  border-radius: 4px;
+  padding: 4px 6px;
+}
+
+.controls input[type="number"]:focus,
+.controls select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+}
+
+#advanced {
+  border: 1px solid #263450;
+  border-radius: 6px;
+  padding: 6px 10px;
+  background: #101a2d;
+}
+
+#advanced summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.advanced-grid {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  align-items: center;
+}
+#freqValue {
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+  min-width: 90px;
+}
+
+.hint {
+  color: var(--muted);
+}
+
+#status {
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+#progressWrap {
+  width: 120px;
+  height: 6px;
+  background: #223552;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+#progressBar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #f9b233, #ff6d5a);
+  transition: width 0.1s linear;
+}
+
+#progressText {
+  color: var(--muted);
+  font-size: 12px;
+  min-width: 32px;
+}
+
+main {
+  position: relative;
+  flex: 1;
+}
+
+#map {
+  height: calc(100vh - 72px);
+  width: 100%;
+}
+
+#legend {
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  background: rgba(10, 18, 33, 0.85);
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #2b3d5f;
+  text-align: center;
+  width: 80px;
+  z-index: 1000;
+}
+
+.legend-title {
+  font-size: 12px;
+  margin-bottom: 8px;
+  color: var(--muted);
+}
+
+#legendMax,
+#legendMin {
+  font-size: 11px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+#legendCanvas {
+  display: block;
+  width: 28px;
+  height: 180px;
+  margin: 0 auto;
+}
+
+#legendBody {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+  justify-content: center;
+}
+
+#legendTicks {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 180px;
+  font-size: 11px;
+  color: var(--muted);
+  min-width: 46px;
+  text-align: left;
+}
+
+.leaflet-container {
+  background: #0b1424;
+}
+
+@media (max-width: 900px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .controls {
+    flex-wrap: wrap;
+  }
+
+  #map {
+    height: calc(100vh - 128px);
+  }
+}
